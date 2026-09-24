@@ -62,6 +62,7 @@ We encourage you to keep your code blocks, printing statements, and final answer
 
 ```{r}
 #WRITE YOUR CODE HERE
+dataset <- read.delim("data/movies3.tsv")
 
 ```
 
@@ -261,13 +262,16 @@ For the next part of the assignment, assume that the movies in your data frame a
 
 ```{r}
 #WRITE YOUR CODE HERE
+result <- t.test(dataset$revenue, conf.level = 0.90)
 
+result$estimate
+result$conf.int
 
 ```
 
 **Your Answer:**
 
-Write your formulated response here.
+The sample mean revenue is 77277126. The 90% confidence interval for the population mean revenue ranges from 68027656 to 86526597 dollars.
 
 2
 
@@ -279,35 +283,53 @@ d.  Assume that the variance of revenue for movies with a male director in your 
 *step a*
 
 ```{r}
-#WRITE YOUR CODE HERE
+table(dataset$director_gender)
 
 ```
 
 **Your Answer:**
 
-Write your formulated response here.
+In the sample, 588 movies were directed by male directors and 65 movies were directed by female directors.
 
 *step b*
 
 ```{r}
 #WRITE YOUR CODE HERE
+dataset$SexDum<-NA
+dataset$SexDum[dataset$director_gender=="male"]<-1
+dataset$SexDum[dataset$director_gender=="female"]<-0
+table(dataset$SexDum)
+
+binom.test(588, 653, 0.5)
 
 ```
 
 **Your Answer:**
 
-Write your formulated response here.
+Null hypothesis: H0 : p=0,5
+
+Alternative hypothesis: H1 : p!= 0,5
+
+Significance level: alpha = 0,05
+
+p-value \< 2,2e-16
+
+We reject the H0 hypothesis because the p-value is smaller than significance level of 0,05. The test also shows that about 90% of the movies with known director gender were directed by male directors.
 
 *step c*
 
 ```{r}
-#WRITE YOUR CODE HERE
+dataset$revenue_in_millions <- dataset$revenue / 1000000
+manvariance<-var(dataset$revenue_in_millions[dataset$director_gender=="male"],na.rm=TRUE)
+womanvariance<-var(dataset$revenue_in_millions[dataset$director_gender=="female"],na.rm=TRUE)
 
+manvariance
+womanvariance
 ```
 
 **Your Answer:**
 
-Write your formulated response here.
+The variance of revenue for movies with male directors is 24280.03. The variance for movies with female directors is 8617.23.
 
 *step d*
 
