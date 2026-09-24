@@ -62,6 +62,7 @@ We encourage you to keep your code blocks, printing statements, and final answer
 
 ```{r}
 #WRITE YOUR CODE HERE
+datset<-read.table("data/movies3.tsv",sep=",",header=TRUE)
 
 ```
 
@@ -256,7 +257,10 @@ For the next part of the assignment, assume that the movies in your data frame a
 
 ```{r}
 #WRITE YOUR CODE HERE
+result <- t.test(<data>$revenue, conf.level = 0.90)
 
+result$estimate
+result$conf.int
 
 ```
 
