@@ -169,11 +169,15 @@ Write your formulated response here.
 
 # Week 2
 
+```{r}
+movies <- read.delim("data/movies3.tsv")
+```
+
 1 Is your dataset movies3.tsv the full population, or is it a sample of a larger population? If the latter, how would you describe the full population? \textbf{[4 points]}
 
 *Your answer here:*
 
-Write your formulated response here.
+I think this dataset is a sample of a larger population because the full population is the movies that are in the dataset but also movies that are not in the dataset. Therefore the movies in the dataset are only a fraction of all movies. 
 
 2 For this question, you will assume that your data set is the full population.
 
@@ -186,13 +190,14 @@ e.  Using the formulas of the *Central Limit Theorem*, give the distribution of 
 *Step a*
 
 ```{r}
-#WRITE YOUR CODE HERE
+#github test
+mean(movies$vote_average)
 
 ```
 
 **Your Answer:**
 
-Write your formulated response here.
+the mean of the variable 'vote average' in the dataset is 5.97
 
 *Step b*
 
