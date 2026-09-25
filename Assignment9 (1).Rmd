@@ -209,7 +209,10 @@ ggplot(dataset, aes(x = log_revenue)) +
 
 ```{r}
 
-#WRITE YOUR CODE HERE
+#WRITE YOUR CODE 
+dataset = dataset %>%
+  mutate(log_revenue = na_if(log_revenue, -Inf))
+
 revenue_mean = mean(dataset$revenue)
 revenue_sd = sd(dataset$revenue)
 revenue_n = nrow(dataset)
@@ -245,7 +248,7 @@ print(log_kurtosis)
 
 **Your Answer:**
 
-Write your formulated response here.
+Revenue has a skewness of approximately 3.55, which matches the right skewed shape of the revenue histogram. Log revenue has a skewness of about -2.46 which matches the left skewed shape of the log revenue histogram. The excess kurtosis is about 15.70 for revenue and 11.47 for log revenue. Both values are much higher than 0, this means that both distributions are different from a normal distribution
 
 # Week 2
 
