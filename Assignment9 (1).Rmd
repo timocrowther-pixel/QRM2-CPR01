@@ -64,6 +64,7 @@ We encourage you to keep your code blocks, printing statements, and final answer
 #WRITE YOUR CODE HERE
 dataset <- read.delim("data/movies3.tsv")
 library(tidyverse)
+library(dplyr)
 nrow(dataset)
 ncol(dataset)
 head(dataset)
@@ -133,6 +134,7 @@ min_revenue = dataset %>%
   filter(revenue == min(revenue, na.rm = TRUE)) %>%
   select(title, revenue) %>%
   slice_head(n = 1)
+
 print(top_revenue)
 print(min_revenue)
 ```
