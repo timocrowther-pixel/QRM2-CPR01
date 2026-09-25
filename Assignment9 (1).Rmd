@@ -62,7 +62,7 @@ We encourage you to keep your code blocks, printing statements, and final answer
 
 ```{r}
 #WRITE YOUR CODE HERE
-dataset <- read.delim("data/movies3.tsv")
+dataset = read.delim("data/movies3.tsv")
 library(tidyverse)
 library(dplyr)
 nrow(dataset)
@@ -106,7 +106,7 @@ Each week consists of 1, 2, or 3 subquestions. The total amount of points you ca
 ```{r}
 
 #WRITE YOUR CODE HERE
-revenue_summary <- dataset %>%
+revenue_summary = dataset %>%
   summarize(
     mean_revenue = mean(revenue, na.rm = TRUE),
     median_revenue = median(revenue, na.rm= TRUE),
@@ -165,15 +165,17 @@ The revenue distribution is skewed to the right. Most movies seem to have lower 
 ```{r}
 
 #WRITE YOUR CODE HERE
-dataset <- dataset %>%
+dataset = dataset %>%
   mutate(log_revenue = log(revenue))
 
-dataset %>%
+zero_revenue = dataset %>%
   filter(revenue == 0) %>%
-  select(revenue, log_revenue) %>%
-  slice_head(n = 5)
+  select(revenue, log_revenue)
 
-mean(dataset$log_revenue)
+  head(zero_revenue)
+
+average_log_revenue = mean(dataset$log_revenue, na.rm = TRUE)
+print(average_log_revenue)
 ```
 
 **Your Answer:**
@@ -185,10 +187,10 @@ For movies with revenues equal to 0, the log revenue becomes -Inf. Because the l
 ```{r}
 
 #WRITE YOUR CODE HERE
-dataset <- dataset %>%
+dataset = dataset %>%
   mutate(log_revenue = na_if(log_revenue, -Inf))
 
-log_revenue_no_na <- dataset$log_revenue[!is.na(dataset$log_revenue)]
+log_revenue_no_na = dataset$log_revenue[!is.na(dataset$log_revenue)]
 
 mean(log_revenue_no_na)
 
@@ -208,20 +210,37 @@ ggplot(dataset, aes(x = log_revenue)) +
 ```{r}
 
 #WRITE YOUR CODE HERE
-revenue_mean <- mean(dataset$revenue)
-revenue_sd <- sd(dataset$revenue)
-revenue_n <- nrow(dataset)
+revenue_mean = mean(dataset$revenue)
+revenue_sd = sd(dataset$revenue)
+revenue_n = nrow(dataset)
 
-revenue_skewness <-
+revenue_skewness =
   (1 / revenue_n) *
-  sum(((dataset$revenue - revenue_mean) / revenue_sd)^3)
+  sum(((dataset$revenue - revenue_mean) / revenue_sd)^3, na.rm = TRUE)
 
-revenue_kurtosis <-
+revenue_kurtosis =
   (1 / revenue_n) *
-  sum(((dataset$revenue - revenue_mean) / revenue_sd)^4) - 3
+  sum(((dataset$revenue - revenue_mean) / revenue_sd)^4, na.rm = TRUE) - 3
 
-revenue_skewness
-revenue_kurtosis
+print(revenue_skewness)
+print(revenue_kurtosis)
+
+log_revenue = dataset$log_revenue[!is.na(dataset$log_revenue)]
+
+log_n = sum(!is.na(dataset$log_revenue))
+log_mean = mean(log_revenue)
+log_sd = sd(log_revenue)
+
+log_skewness =
+  (1 / log_n) *
+  sum(((log_revenue - log_mean) / log_sd)^3)
+
+log_kurtosis =
+  (1 / log_n) *
+  sum(((log_revenue - log_mean) / log_sd)^4) - 3
+
+print(log_skewness)
+print(log_kurtosis)
 ```
 
 **Your Answer:**
