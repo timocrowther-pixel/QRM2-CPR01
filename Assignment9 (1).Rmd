@@ -18,7 +18,6 @@ header-includes:
     showtabs = false,
     breaklines,
     commandchars=\\\{\}
-  }
 format:
   html:
     code-overflow: wrap
@@ -128,12 +127,11 @@ The mean revenue is 77,277,126 and the median is 17,986,781. The max revenue is 
 #WRITE YOUR CODE HERE
 top_revenue = dataset %>%
   filter(revenue == max(revenue, na.rm = TRUE)) %>%
-  select(title, revenue)
+  select(title, revenue)#
 
 min_revenue = dataset %>%
   filter(revenue == min(revenue, na.rm = TRUE)) %>%
-  select(title, revenue) %>%
-  slice_head(n = 1)
+  select(title, revenue) 
 
 print(top_revenue)
 print(min_revenue)
@@ -180,7 +178,7 @@ print(average_log_revenue)
 
 **Your Answer:**
 
-For movies with revenues equal to 0, the log revenue becomes -Inf. Because the log revenue variable contains these -Ifn values, its mean also is -Inf.
+For movies with revenues equal to 0, the log revenue becomes -Inf. Because the log revenue variable contains these -Inf values, its mean also is -Inf.
 
 *Step e*
 

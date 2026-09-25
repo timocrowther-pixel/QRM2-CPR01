@@ -1,0 +1,1648 @@
+% Options for packages loaded elsewhere
+\PassOptionsToPackage{unicode}{hyperref}
+\PassOptionsToPackage{hyphens}{url}
+\documentclass[
+]{article}
+\usepackage{xcolor}
+\usepackage[margin=1in]{geometry}
+\usepackage{amsmath,amssymb}
+\setcounter{secnumdepth}{5}
+\usepackage{iftex}
+\ifPDFTeX
+  \usepackage[T1]{fontenc}
+  \usepackage[utf8]{inputenc}
+  \usepackage{textcomp} % provide euro and other symbols
+\else % if luatex or xetex
+  \usepackage{unicode-math} % this also loads fontspec
+  \defaultfontfeatures{Scale=MatchLowercase}
+  \defaultfontfeatures[\rmfamily]{Ligatures=TeX,Scale=1}
+\fi
+\usepackage{lmodern}
+\ifPDFTeX\else
+  % xetex/luatex font selection
+\fi
+% Use upquote if available, for straight quotes in verbatim environments
+\IfFileExists{upquote.sty}{\usepackage{upquote}}{}
+\IfFileExists{microtype.sty}{% use microtype if available
+  \usepackage[]{microtype}
+  \UseMicrotypeSet[protrusion]{basicmath} % disable protrusion for tt fonts
+}{}
+\makeatletter
+\@ifundefined{KOMAClassName}{% if non-KOMA class
+  \IfFileExists{parskip.sty}{%
+    \usepackage{parskip}
+  }{% else
+    \setlength{\parindent}{0pt}
+    \setlength{\parskip}{6pt plus 2pt minus 1pt}}
+}{% if KOMA class
+  \KOMAoptions{parskip=half}}
+\makeatother
+\usepackage{color}
+\usepackage{fancyvrb}
+\newcommand{\VerbBar}{|}
+\newcommand{\VERB}{\Verb[commandchars=\\\{\}]}
+\DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+% Add ',fontsize=\small' for more characters per line
+\usepackage{framed}
+\definecolor{shadecolor}{RGB}{248,248,248}
+\newenvironment{Shaded}{\begin{snugshade}}{\end{snugshade}}
+\newcommand{\AlertTok}[1]{\textcolor[rgb]{0.94,0.16,0.16}{#1}}
+\newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{#1}}
+\newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\BuiltInTok}[1]{#1}
+\newcommand{\CharTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\CommentTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textit{#1}}}
+\newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{#1}}
+\newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
+\newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{#1}}
+\newcommand{\DecValTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\ErrorTok}[1]{\textcolor[rgb]{0.64,0.00,0.00}{\textbf{#1}}}
+\newcommand{\ExtensionTok}[1]{#1}
+\newcommand{\FloatTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
+\newcommand{\ImportTok}[1]{#1}
+\newcommand{\InformationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
+\newcommand{\NormalTok}[1]{#1}
+\newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.81,0.36,0.00}{\textbf{#1}}}
+\newcommand{\OtherTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{#1}}
+\newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textit{#1}}}
+\newcommand{\RegionMarkerTok}[1]{#1}
+\newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.81,0.36,0.00}{\textbf{#1}}}
+\newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\StringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\VariableTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\WarningTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\usepackage{graphicx}
+\makeatletter
+\newsavebox\pandoc@box
+\newcommand*\pandocbounded[1]{% scales image to fit in text height/width
+  \sbox\pandoc@box{#1}%
+  \Gscale@div\@tempa{\textheight}{\dimexpr\ht\pandoc@box+\dp\pandoc@box\relax}%
+  \Gscale@div\@tempb{\linewidth}{\wd\pandoc@box}%
+  \ifdim\@tempb\p@<\@tempa\p@\let\@tempa\@tempb\fi% select the smaller of both
+  \ifdim\@tempa\p@<\p@\scalebox{\@tempa}{\usebox\pandoc@box}%
+  \else\usebox{\pandoc@box}%
+  \fi%
+}
+% Set default figure placement to htbp
+\def\fps@figure{htbp}
+\makeatother
+\setlength{\emergencystretch}{3em} % prevent overfull lines
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+\setcounter{section}{-1}
+\usepackage{fvextra}
+\DefineVerbatimEnvironment{Highlighting}{Verbatim}{
+  showspaces = false,
+  showtabs = false,
+  breaklines,
+  commandchars=\\\{\}
+
+\usepackage{bookmark}
+\IfFileExists{xurl.sty}{\usepackage{xurl}}{} % add URL line breaks if available
+\urlstyle{same}
+% fallback for those not using the hyperref driver hyperxmp:
+\makeatletter
+\@ifundefined{xmpquote}{\newcommand{\xmpquote}[1]{#1}}{}
+\makeatother
+\hypersetup{
+  pdftitle={QRM II Graded Assignment (9)},
+  pdfauthor={Assignement Group 39: Jake Kody Te Koppele Blakey, Omer Faruk, Timo Crowther, Jaleel Bart \& Fatima Malik},
+  hidelinks,
+  pdfcreator={LaTeX via pandoc}}
+
+\title{QRM II Graded Assignment (9)}
+\usepackage{etoolbox}
+\makeatletter
+\providecommand{\subtitle}[1]{% add subtitle to \maketitle
+  \apptocmd{\@title}{\par {\large #1 \par}}{}{}
+}
+\makeatother
+\subtitle{Period 1, 2026}
+\author{Assignement Group 39: Jake Kody Te Koppele Blakey, Omer Faruk,
+Timo Crowther, Jaleel Bart \& Fatima Malik}
+\date{25-09-2026}
+
+\begin{document}
+\maketitle
+
+\section{Introduction}\label{introduction}
+
+This assignment is to be completed in groups of 4-5. Further, all
+students in your group need to be assigned to the same R tutorial group
+(Friday's tutorial). You can sign yourself up for a group on Canvas.
+Please do so
+\textbf{before the start of your first R tutorial on Friday September 4th.}
+You can use the Discussion Board in Canvas if you do not have a group
+yet or if your group is incomplete.
+
+The assignment has 5 parts, and each part corresponds to the course
+material of that week (with the exclusion of week 6, for which there is
+no R programming material).
+
+You are supposed to hand in these assignments on Canvas at the following
+dates:
+
+\begin{itemize}
+\tightlist
+\item
+  \textbf{Deadline 1} \emph{Sunday September 27th, at 23:59pm}: you are
+  supposed to hand in weeks 1, 2, and 3 of this assignment. This will
+  determine 18\% of your overall course grade
+\item
+  \textbf{Deadline 2} \emph{Sunday October 11th, at 23:59pm}: you are
+  supposed to hand in weeks 4, and 5 of this assignment. This will
+  determine 12\% of your overall course grade
+\end{itemize}
+
+The R tutorials (each Friday) will consist of two halves. During the
+first half, you will discuss the tutorial exercises. These can be
+downloaded separately from Canvas. During the second half, you can work
+on this graded assignment within your own group. The purpose is that you
+find out how to work with R for doing statistical analyses by yourself.
+The tutorial exercises are meant to teach you basic commands to get you
+started, but to answer the problem sets in this assignment, you might
+need to research your own solutions, and use functions and commands not
+described in the tutorial exercises. Learning how to solve your own
+research problems is integral part of learning R. When you and your
+group get stuck on how to approach an exercise, the hierarchy in finding
+your way is as follows:
+
+\begin{itemize}
+\tightlist
+\item
+  use the concepts from the tutorial exercises;
+\item
+  use the cheat sheets available on Canvas;
+\item
+  use Google, YouTube, StackOverflow, or another website;
+\item
+  ask the teacher.
+\end{itemize}
+
+The use of generative AI is \textbf{not} permitted and may result in a
+grade of 0. See the AI protocol in the course manual for details.
+
+To answer the assignment, you can simply fill out this R markdown
+document. There are designated places which you can fill with R code.
+There are also designated spaces for you to answer each question. Often,
+the structure of an answer will be as follows. First, you type the R
+code in the designated box. This will show how you analyzed the data to
+get the answer to the question. Below the box for the R code, you will
+then summarize your answer to the question, i.e.~what are the
+conclusions that you draw from the data analysis?
+
+When handing in, you are supposed to submit this .Rmd file, and a
+knitted version of this document. You can knit this document to pdf,
+word, or html. Knitting to pdf requires you to have a .tex distribution
+installed on your computer. Knitting to Word requires you to have Word
+installed.
+
+The exercises are designed such that you should be able to finish the
+majority of them during the tutorial each week. If you are not able to
+finish them fully during that time, you are expected to work on it in
+your own time using the computers on campus or your own device. It is
+best to meet as a group in-person when working together. If you want to
+work remotely, github is a good platform to guarantee smooth
+collaboration. Alternatively, you can email this .Rmd file back and
+forth to one another as a group, but this is not recommended as it is
+more cumbersome.
+
+We encourage you to keep your code blocks, printing statements, and
+final answers, as short as possible. In any case, there is a page limit
+of 6 pages per week, which encompasses the total length of this document
+which consists of the questions, your coding lines, and your answers.
+When your answers to questions of the respective week exceed this page
+limit, they will not be graded, resulting in zero points.
+
+\section{Week 1}\label{week-1}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  Find the dataset ``movies3.tsv'' on Canvas. Describe your data set:
+  How many observations does it have. How many variables are there? How
+  many subjects? What consists of a subject? \textbf{[4 points]}
+\end{enumerate}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\#WRITE YOUR CODE HERE}
+\NormalTok{dataset }\OtherTok{=} \FunctionTok{read.delim}\NormalTok{(}\StringTok{"data/movies3.tsv"}\NormalTok{)}
+\FunctionTok{library}\NormalTok{(tidyverse)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## -- Attaching core tidyverse packages ------------------------ tidyverse 2.0.0 --
+## v dplyr     1.2.1     v readr     2.2.0
+## v forcats   1.0.1     v stringr   1.6.0
+## v ggplot2   4.0.3     v tibble    3.3.1
+## v lubridate 1.9.5     v tidyr     1.3.2
+## v purrr     1.2.2     
+## -- Conflicts ------------------------------------------ tidyverse_conflicts() --
+## x dplyr::filter() masks stats::filter()
+## x dplyr::lag()    masks stats::lag()
+## i Use the conflicted package (<http://conflicted.r-lib.org/>) to force all conflicts to become errors
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{library}\NormalTok{(dplyr)}
+\FunctionTok{nrow}\NormalTok{(dataset)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 707
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{ncol}\NormalTok{(dataset)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 19
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{head}\NormalTok{(dataset)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##   index   budget
+## 1     2 2.45e+08
+## 2  2460 1.60e+07
+## 3   219 1.20e+08
+## 4  2900 1.20e+07
+## 5  2236 0.00e+00
+## 6   386 7.50e+07
+##                                                                           keywords
+## 1                                       spy based on novel secret agent sequel mi6
+## 2                                                                             <NA>
+## 3                                             robbery secret identity secret agent
+## 4                                                                             <NA>
+## 5 wave surfing sport mentor prot\\u00e9g\\u00e9 relationship santa cruz california
+## 6                                    berlin assassin based on novel amnesia sniper
+##   original_language                           title popularity release_date
+## 1                en                         Spectre 107.376788   2015-10-26
+## 2                en                      The Unborn  15.788784   2009-01-09
+## 3                en Charlie's Angels: Full Throttle  33.616115   2003-06-27
+## 4                ja         Space Battleship Yamato   5.158067   2010-12-01
+## 5                en               Chasing Mavericks  13.621201   2012-10-25
+## 6                en            The Bourne Supremacy  53.213931   2004-07-23
+##     revenue runtime vote_average vote_count    genre release_year release_month
+## 1 880674609     148          6.3       4466   Action         2015            10
+## 2  76514050      87          4.8        365 Thriller         2009             1
+## 3 259175788     106          5.2        914   Comedy         2003             6
+## 4  11212294     131          6.3         59  Fiction         2010            12
+## 5         0     117          7.0        216    Drama         2012            10
+## 6 288500217     108          7.2       2825    Drama         2004             7
+##   release_day      first_actor first_actor_gender director_first_name
+## 1          26     Daniel Craig               male                 Sam
+## 2           9   Odette Annable             female               David
+## 3          27     Cameron Diaz               male                 McG
+## 4           1 Hiroyuki Ikeuchi               male             Takashi
+## 5          25    Gerard Butler               male              Curtis
+## 6          23       Matt Damon               male                Paul
+##   director_gender
+## 1            male
+## 2            male
+## 3            <NA>
+## 4            male
+## 5            male
+## 6            male
+\end{verbatim}
+
+\textbf{Your Answer:}
+
+The dataset has 707 observations and 19 variables, there are 707
+subjects in the dataset and each subject is one movie, with each row
+representing one movie.
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\setcounter{enumi}{1}
+\tightlist
+\item
+  Which of the following types of variables are present in your data
+  set? (i) nominal; (ii) ordinal; (iii); continuous; (iv) discrete. If
+  present, name one example of such a variable present in your data set.
+  \textbf{[4 points]}
+\end{enumerate}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\#WRITE YOUR CODE HERE}
+\FunctionTok{str}\NormalTok{(dataset)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## 'data.frame':    707 obs. of  19 variables:
+##  $ index              : int  2 2460 219 2900 2236 386 122 4627 1699 4636 ...
+##  $ budget             : num  2.45e+08 1.60e+07 1.20e+08 1.20e+07 0.00 7.50e+07 1.50e+08 0.00 6.00e+07 0.00 ...
+##  $ keywords           : chr  "spy based on novel secret agent sequel mi6" NA "robbery secret identity secret agent" NA ...
+##  $ original_language  : chr  "en" "en" "en" "ja" ...
+##  $ title              : chr  "Spectre" "The Unborn" "Charlie's Angels: Full Throttle" "Space Battleship Yamato" ...
+##  $ popularity         : num  107.38 15.79 33.62 5.16 13.62 ...
+##  $ release_date       : chr  "2015-10-26" "2009-01-09" "2003-06-27" "2010-12-01" ...
+##  $ revenue            : num  8.81e+08 7.65e+07 2.59e+08 1.12e+07 0.00 ...
+##  $ runtime            : int  148 87 106 131 117 108 107 99 104 96 ...
+##  $ vote_average       : num  6.3 4.8 5.2 6.3 7 7.2 6.2 6.2 6.1 5.7 ...
+##  $ vote_count         : int  4466 365 914 59 216 2825 4021 11 400 16 ...
+##  $ genre              : chr  "Action" "Thriller" "Comedy" "Fiction" ...
+##  $ release_year       : int  2015 2009 2003 2010 2012 2004 2009 2015 2001 2000 ...
+##  $ release_month      : int  10 1 6 12 10 7 4 2 4 1 ...
+##  $ release_day        : int  26 9 27 1 25 23 28 7 6 21 ...
+##  $ first_actor        : chr  "Daniel Craig" "Odette Annable" "Cameron Diaz" "Hiroyuki Ikeuchi" ...
+##  $ first_actor_gender : chr  "male" "female" "male" "male" ...
+##  $ director_first_name: chr  "Sam" "David" "McG" "Takashi" ...
+##  $ director_gender    : chr  "male" "male" NA "male" ...
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{head}\NormalTok{(dataset)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##   index   budget
+## 1     2 2.45e+08
+## 2  2460 1.60e+07
+## 3   219 1.20e+08
+## 4  2900 1.20e+07
+## 5  2236 0.00e+00
+## 6   386 7.50e+07
+##                                                                           keywords
+## 1                                       spy based on novel secret agent sequel mi6
+## 2                                                                             <NA>
+## 3                                             robbery secret identity secret agent
+## 4                                                                             <NA>
+## 5 wave surfing sport mentor prot\\u00e9g\\u00e9 relationship santa cruz california
+## 6                                    berlin assassin based on novel amnesia sniper
+##   original_language                           title popularity release_date
+## 1                en                         Spectre 107.376788   2015-10-26
+## 2                en                      The Unborn  15.788784   2009-01-09
+## 3                en Charlie's Angels: Full Throttle  33.616115   2003-06-27
+## 4                ja         Space Battleship Yamato   5.158067   2010-12-01
+## 5                en               Chasing Mavericks  13.621201   2012-10-25
+## 6                en            The Bourne Supremacy  53.213931   2004-07-23
+##     revenue runtime vote_average vote_count    genre release_year release_month
+## 1 880674609     148          6.3       4466   Action         2015            10
+## 2  76514050      87          4.8        365 Thriller         2009             1
+## 3 259175788     106          5.2        914   Comedy         2003             6
+## 4  11212294     131          6.3         59  Fiction         2010            12
+## 5         0     117          7.0        216    Drama         2012            10
+## 6 288500217     108          7.2       2825    Drama         2004             7
+##   release_day      first_actor first_actor_gender director_first_name
+## 1          26     Daniel Craig               male                 Sam
+## 2           9   Odette Annable             female               David
+## 3          27     Cameron Diaz               male                 McG
+## 4           1 Hiroyuki Ikeuchi               male             Takashi
+## 5          25    Gerard Butler               male              Curtis
+## 6          23       Matt Damon               male                Paul
+##   director_gender
+## 1            male
+## 2            male
+## 3            <NA>
+## 4            male
+## 5            male
+## 6            male
+\end{verbatim}
+
+\textbf{Your Answer:}
+
+The dataset contains nominal, continuous and discrete variables. An
+example of nominal variable in our dataset is genre, as movie genres are
+categories that are descriptive and cannot be ranked. An example of a
+continuous variable is popularity, because it can take numerical values
+within a range. Here an example of a discrete variable is vote\_count,
+as it is a count. There also doesn't seem to be a clear ordinal variable
+in this dataset
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\setcounter{enumi}{2}
+\tightlist
+\item
+  A movie studio wants to know which types of movies give maximal
+  revenue. Perform the following steps to provide the movie studio with
+  an analysis which corresponds to their request:
+\end{enumerate}
+
+\begin{enumerate}
+\def\labelenumi{\alph{enumi}.}
+\tightlist
+\item
+  Summarize the variable revenue and report its mean, median, maximum,
+  and minimum. \textbf{[2 points]}
+\item
+  Which movie has the highest revenue in your data set and how much is
+  this revenue. Which movie has the lowest and how much is its revenue?
+  If multiple movies have the exact same highest or lowest revenue, give
+  only one example. \textbf{[2 points]}
+\item
+  Create a histogram of the variable revenue. Make sure it has an
+  appropriate title, and appropriate titles and labels for the x- and
+  y-axis. Describe the shape of the histogram. What does this tell you
+  about the nature of making money in the movies industry?
+  \textbf{[2 points]}
+\item
+  Add a new variable to your data set: the log of revenue. When creating
+  this variable, what happens to movies for which revenue is zero? What
+  then happens when you calculate the mean of log revenue?
+  \textbf{[2 points]}
+\item
+  For movies that have a revenue of zero, replace log of revenue with
+  ``NA''. What is now the mean of log of revenue? Create a histogram for
+  log revenue, again with an appropriate title, x- and y-axis labels.
+  Describe the shape of this histogram. \textbf{[2 points]}
+\item
+  For the variables revenue and log of revenue calculate their skewness
+  and kurtosis. How do these numbers relate to the shape of the
+  histograms that you estimated under d.) and e.)? \textbf{[2 points]}
+\end{enumerate}
+
+For each step, you should provide first all the code you used to answer
+the question and then formulate an answer using full sentences.
+
+Each week consists of 1, 2, or 3 subquestions. The total amount of
+points you can earn per week is 20 points.
+
+\emph{Step a}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\#WRITE YOUR CODE HERE}
+\NormalTok{revenue\_summary }\OtherTok{=}\NormalTok{ dataset }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{summarize}\NormalTok{(}
+    \AttributeTok{mean\_revenue =} \FunctionTok{mean}\NormalTok{(revenue, }\AttributeTok{na.rm =} \ConstantTok{TRUE}\NormalTok{),}
+    \AttributeTok{median\_revenue =} \FunctionTok{median}\NormalTok{(revenue, }\AttributeTok{na.rm=} \ConstantTok{TRUE}\NormalTok{),}
+    \AttributeTok{max\_revenue =} \FunctionTok{max}\NormalTok{(revenue, }\AttributeTok{na.rm =} \ConstantTok{TRUE}\NormalTok{),}
+    \AttributeTok{min\_revenue =} \FunctionTok{min}\NormalTok{(revenue, }\AttributeTok{na.rm =} \ConstantTok{TRUE}\NormalTok{)}
+    
+\NormalTok{  )}
+    \FunctionTok{print}\NormalTok{(revenue\_summary)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##   mean_revenue median_revenue max_revenue min_revenue
+## 1     77277126       17986781  1153304495           0
+\end{verbatim}
+
+\textbf{Your Answer:}
+
+The mean revenue is 77,277,126 and the median is 17,986,781. The max
+revenue is 1,153,304,495 and the min revenue is 0. The mean is much
+higher than the median which means that some very high revenue sales
+increased the mean.
+
+\emph{Step b}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\#WRITE YOUR CODE HERE}
+\NormalTok{top\_revenue }\OtherTok{=}\NormalTok{ dataset }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{filter}\NormalTok{(revenue }\SpecialCharTok{==} \FunctionTok{max}\NormalTok{(revenue, }\AttributeTok{na.rm =} \ConstantTok{TRUE}\NormalTok{)) }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{select}\NormalTok{(title, revenue)}\CommentTok{\#}
+
+\NormalTok{min\_revenue }\OtherTok{=}\NormalTok{ dataset }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{filter}\NormalTok{(revenue }\SpecialCharTok{==} \FunctionTok{min}\NormalTok{(revenue, }\AttributeTok{na.rm =} \ConstantTok{TRUE}\NormalTok{)) }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{select}\NormalTok{(title, revenue) }
+
+\FunctionTok{print}\NormalTok{(top\_revenue)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##                        title    revenue
+## 1 Captain America: Civil War 1153304495
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{print}\NormalTok{(min\_revenue)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##                                                     title revenue
+## 1                                       Chasing Mavericks       0
+## 2                                                 Bizarre       0
+## 3                                            Chuck & Buck       0
+## 4                                          Speedway Junky       0
+## 5                                  Smilla's Sense of Snow       0
+## 6                                   Dysfunctional Friends       0
+## 7                                    Chicken Tikka Masala       0
+## 8                                                  Decoys       0
+## 9                      High School Musical 3: Senior Year       0
+## 10                                                  Clean       0
+## 11                                        The Ladykillers       0
+## 12                                   Survival of the Dead       0
+## 13                                             The Mighty       0
+## 14                           Love in the Time of Monsters       0
+## 15                                  The Vatican Exorcisms       0
+## 16                                                Exotica       0
+## 17                                     A Walk on the Moon       0
+## 18                                      Small Time Crooks       0
+## 19                                            Light It Up       0
+## 20                                     The Cry of the Owl       0
+## 21                                   Kickboxer: Vengeance       0
+## 22                                            Love Stinks       0
+## 23                                           Best in Show       0
+## 24                                     Fly Me to the Moon       0
+## 25                                   Dude Where's My Dog?       0
+## 26                                          Extreme Movie       0
+## 27                                       Adam Resurrected       0
+## 28                                 Breakin' All the Rules       0
+## 29                                         Time to Choose       0
+## 30                                              Palo Alto       0
+## 31                                            The Wolfman       0
+## 32                                           The Big Swap       0
+## 33                                The Wendell Baker Story       0
+## 34                                    Faith Like Potatoes       0
+## 35                                    Theresa Is a Mother       0
+## 36                                        Running Forever       0
+## 37                                                 Fabled       0
+## 38                                   Butterfly on a Wheel       0
+## 39                                       Buffalo Soldiers       0
+## 40                                       Stealing Harvard       0
+## 41                      A Thin Line Between Love and Hate       0
+## 42                                         Neal 'n' Nikki       0
+## 43                                         Mercury Rising       0
+## 44                                            Being Julia       0
+## 45                                            Without Men       0
+## 46                                         Three to Tango       0
+## 47                                        Rugrats Go Wild       0
+## 48                                     The Flower of Evil       0
+## 49                                   A LEGO Brickumentary       0
+## 50                                              Northfork       0
+## 51                                 Pooh's Heffalump Movie       0
+## 52                        Gangster's Paradise: Jerusalema       0
+## 53                              Some Guy Who Kills People       0
+## 54                                            Elite Squad       0
+## 55                                                Don Jon       0
+## 56                                          Straightheads       0
+## 57                                     The Slaughter Rule       0
+## 58                                                 Wolves       0
+## 59                                             The Lovers       0
+## 60                   The Adventures of Elmo in Grouchland       0
+## 61                                       Casa De Mi Padre       0
+## 62                                  Incident at Loch Ness       0
+## 63                                24 7: Twenty Four Seven       0
+## 64                                                  Trash       0
+## 65                                        Mozart's Sister       0
+## 66                                          Broken Horses       0
+## 67                                    The Secret of Kells       0
+## 68                                             Rudderless       0
+## 69                              What Planet Are You From?       0
+## 70                                                 Cavite       0
+## 71                                     Over Her Dead Body       0
+## 72               Born to Fly: Elizabeth Streb vs. Gravity       0
+## 73                                                 Exiled       0
+## 74                                                Red Dog       0
+## 75                                      I Got the Hook Up       0
+## 76                                              In Dreams       0
+## 77                                              The Salon       0
+## 78                                             Confidence       0
+## 79                                             Bubble Boy       0
+## 80                                                  Cargo       0
+## 81                                            3 Backyards       0
+## 82                              8: The Mormon Proposition       0
+## 83                                              Bowfinger       0
+## 84                                     All the Real Girls       0
+## 85                        Me and You and Everyone We Know       0
+## 86                                          Heartbreakers       0
+## 87                                         Goodbye Bafana       0
+## 88                                             Ira & Abby       0
+## 89                                   The Other Dream Team       0
+## 90                                              UnDivided       0
+## 91                                            Dance Flick       0
+## 92                                       The Brass Teapot       0
+## 93                                       Small Apartments       0
+## 94                                    I Dreamed of Africa       0
+## 95                                  Welcome to Collinwood       0
+## 96                                              Good Dick       0
+## 97                                           Johnny Suede       0
+## 98                                            The Descent       0
+## 99                                             Adulterers       0
+## 100                                  The Killer Inside Me       0
+## 101                                       Grace Unplugged       0
+## 102                          The Outrageous Sophie Tucker       0
+## 103                          The Lost Skeleton of Cadavra       0
+## 104                                       Lords of London       0
+## 105                          My Big Fat Independent Movie       0
+## 106                                          Barry Munday       0
+## 107                                      Peaceful Warrior       0
+## 108                The Visitors II: The Corridors of Time       0
+## 109                                          Multiplicity       0
+## 110                                         The Borrowers       0
+## 111                                           Ulee's Gold       0
+## 112                                               Wah-Wah       0
+## 113                          The Battle of Shaker Heights       0
+## 114                                       The Poker House       0
+## 115                                               Peeples       0
+## 116                                     Hurricane Streets       0
+## 117                                      Mighty Joe Young       0
+## 118                                     Journey to Saturn       0
+## 119                                      Chicago Overcoat       0
+## 120                                The Master of Disguise       0
+## 121                                        In the Bedroom       0
+## 122                                         Birthday Girl       0
+## 123                                Real Women Have Curves       0
+## 124                                       Thir13en Ghosts       0
+## 125                                              Triangle       0
+## 126                            Keeping Up with the Steins       0
+## 127                                        The Good Thief       0
+## 128                                      Dead Man's Shoes       0
+## 129                                         Shine a Light       0
+## 130                                    Love's Abiding Joy       0
+## 131                                    Come Early Morning       0
+## 132                              Straight Out of Brooklyn       0
+## 133                                                Zipper       0
+## 134                                 This Is Martin Bonner       0
+## 135                                      Crazy in Alabama       0
+## 136                                           Crazy Stone       0
+## 137                                       The Living Wake       0
+## 138                                     The Bélier Family       0
+## 139                                     Letters to Juliet       0
+## 140                             Dawn of the Crescent Moon       0
+## 141                                                 Loser       0
+## 142                                            Religulous       0
+## 143                                          The Hit List       0
+## 144                                               Moliere       0
+## 145                                          Little Women       0
+## 146                                                   Paa       0
+## 147                                                 Gerry       0
+## 148 Rise of the Entrepreneur: The Search for a Better Way       0
+## 149                                    The Banger Sisters       0
+## 150                           Jack Brooks: Monster Slayer       0
+## 151                    South Park: Bigger, Longer & Uncut       0
+## 152                                           Desert Blue       0
+## 153                                     Shinjuku Incident       0
+## 154                                             Nine Dead       0
+## 155                                           Ri¢hie Ri¢h       0
+## 156                                            Miss March       0
+## 157                                       Teeth and Blood       0
+## 158                                           The Eclipse       0
+## 159                                           The Cottage       0
+## 160                                               The Ten       0
+## 161                                          The Warlords       0
+## 162                                      Against the Wild       0
+## 163                                        Mutual Friends       0
+## 164                         Valley of the Heart's Delight       0
+## 165                                               28 Days       0
+## 166                                Independence Daysaster       0
+## 167                                            The Bubble       0
+## 168                                Breakfast of Champions       0
+## 169                                        Beat the World       0
+## 170                                    The Straight Story       0
+## 171                                             Housefull       0
+## 172                                   Waiting for Guffman       0
+## 173                                          A Separation       0
+## 174                                             Like Mike       0
+## 175                                   My Fellow Americans       0
+## 176                                       Silver Medalist       0
+## 177                          Scott Walker: 30 Century Man       0
+## 178                                               Animals       0
+## 179                                        Perfect Cowboy       0
+## 180                                     Felicia's Journey       0
+## 181                                             Antiviral       0
+## 182                                     I Heart Huckabees       0
+## 183                                     Anna and the King       0
+## 184                             Christmas with the Kranks       0
+## 185                              A Prairie Home Companion       0
+## 186                             Cinco de Mayo: La Batalla       0
+## 187                                                 Bogus       0
+## 188                                            Go for It!       0
+## 189                                               Shutter       0
+## 190                                          Wind Walkers       0
+## 191                                   The Christmas Bunny       0
+## 192                                                Groove       0
+## 193                                         The Holy Girl       0
+## 194                                  The Walking Deceased       0
+## 195                                              Top Spin       0
+## 196                                   Maria Full of Grace       0
+## 197                                                8 Days       0
+## 198                                Two Can Play That Game       0
+## 199                                           The Watcher       0
+## 200                                               Gunless       0
+## 201                                          Metropolitan       0
+## 202                                    The Man from Earth       0
+## 203                                       Girls Gone Dead       0
+## 204                                             Listening       0
+## 205                                 40 Days and 40 Nights       0
+## 206                               Warlock: The Armageddon       0
+## 207                                           Shadowlands       0
+## 208                                          Tiger Orange       0
+## 209                                        Kate & Leopold       0
+## 210                                          The Greatest       0
+## 211                                      Inspector Gadget       0
+## 212                                Let's Kill Ward's Wife       0
+## 213                                     Playing for Keeps       0
+## 214                                      Creative Control       0
+## 215                                            Persepolis       0
+## 216                                          Just Looking       0
+## 217                                               Madison       0
+## 218                                                 Tango       0
+## 219                                           Roll Bounce       0
+## 220                                      The Californians       0
+## 221                                   High School Musical       0
+## 222                                        Jimmy and Judy       0
+## 223                                     Nicholas Nickleby       0
+## 224                                              The Hole       0
+## 225                                  Fighting Tommy Riley       0
+\end{verbatim}
+
+\textbf{Your Answer:}
+
+The movie with the highest revenue is Captain America: Civil war at
+1,153,304,495. The movie with the lowest revenue is Chasing Mavericks,
+which is 0.
+
+\emph{Step c}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\#WRITE YOUR CODE HERE}
+\FunctionTok{ggplot}\NormalTok{(dataset, }\FunctionTok{aes}\NormalTok{(}\AttributeTok{x =}\NormalTok{ revenue)) }\SpecialCharTok{+}
+  \FunctionTok{geom\_histogram}\NormalTok{() }\SpecialCharTok{+}
+  \FunctionTok{labs}\NormalTok{(}
+    \AttributeTok{title =} \StringTok{"Distribution of Movie Revenue"}\NormalTok{,}
+    \AttributeTok{x =} \StringTok{"Revenue"}\NormalTok{,}
+    \AttributeTok{y =} \StringTok{"Frequency"}
+\NormalTok{  )}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## `stat_bin()` using `bins = 30`. Pick better value `binwidth`.
+\end{verbatim}
+
+\pandocbounded{\includegraphics[keepaspectratio]{Assignment9--1-_files/Assignment9--1-_files/figure-latex/unnamed-chunk-4-1.pdf}}
+
+\textbf{Your Answer:}
+
+The revenue distribution is skewed to the right. Most movies seem to
+have lower revenues, while only a small number of movies have extremely
+high revenues. This tells us that movies with extremely high movie
+revenues are concentrated among a relatively small number of movies.
+
+\emph{Step d}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\#WRITE YOUR CODE HERE}
+\NormalTok{dataset }\OtherTok{=}\NormalTok{ dataset }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{mutate}\NormalTok{(}\AttributeTok{log\_revenue =} \FunctionTok{log}\NormalTok{(revenue))}
+
+\NormalTok{zero\_revenue }\OtherTok{=}\NormalTok{ dataset }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{filter}\NormalTok{(revenue }\SpecialCharTok{==} \DecValTok{0}\NormalTok{) }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{select}\NormalTok{(revenue, log\_revenue)}
+
+  \FunctionTok{head}\NormalTok{(zero\_revenue)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##   revenue log_revenue
+## 1       0        -Inf
+## 2       0        -Inf
+## 3       0        -Inf
+## 4       0        -Inf
+## 5       0        -Inf
+## 6       0        -Inf
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{average\_log\_revenue }\OtherTok{=} \FunctionTok{mean}\NormalTok{(dataset}\SpecialCharTok{$}\NormalTok{log\_revenue, }\AttributeTok{na.rm =} \ConstantTok{TRUE}\NormalTok{)}
+\FunctionTok{print}\NormalTok{(average\_log\_revenue)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] -Inf
+\end{verbatim}
+
+\textbf{Your Answer:}
+
+For movies with revenues equal to 0, the log revenue becomes -Inf.
+Because the log revenue variable contains these -Inf values, its mean
+also is -Inf.
+
+\emph{Step e}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\#WRITE YOUR CODE HERE}
+\NormalTok{dataset }\OtherTok{=}\NormalTok{ dataset }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{mutate}\NormalTok{(}\AttributeTok{log\_revenue =} \FunctionTok{na\_if}\NormalTok{(log\_revenue, }\SpecialCharTok{{-}}\ConstantTok{Inf}\NormalTok{))}
+
+\NormalTok{log\_revenue\_no\_na }\OtherTok{=}\NormalTok{ dataset}\SpecialCharTok{$}\NormalTok{log\_revenue[}\SpecialCharTok{!}\FunctionTok{is.na}\NormalTok{(dataset}\SpecialCharTok{$}\NormalTok{log\_revenue)]}
+
+\FunctionTok{mean}\NormalTok{(log\_revenue\_no\_na)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 17.35027
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{ggplot}\NormalTok{(dataset, }\FunctionTok{aes}\NormalTok{(}\AttributeTok{x =}\NormalTok{ log\_revenue)) }\SpecialCharTok{+}
+  \FunctionTok{geom\_histogram}\NormalTok{() }\SpecialCharTok{+}
+  \FunctionTok{labs}\NormalTok{(}
+    \AttributeTok{title =} \StringTok{"Distribution of Log Revenue"}\NormalTok{,}
+    \AttributeTok{x =} \StringTok{"Log Revenue"}\NormalTok{,}
+    \AttributeTok{y =} \StringTok{"Frequency"}
+\NormalTok{  )}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## `stat_bin()` using `bins = 30`. Pick better value `binwidth`.
+\end{verbatim}
+
+\begin{verbatim}
+## Warning: Removed 225 rows containing non-finite outside the scale range
+## (`stat_bin()`).
+\end{verbatim}
+
+\pandocbounded{\includegraphics[keepaspectratio]{Assignment9--1-_files/Assignment9--1-_files/figure-latex/unnamed-chunk-6-1.pdf}}
+
+\textbf{Your Answer:} Replacing the log revenues of zero-revenue movies
+with NA, the mean log revenue is around 17.35. The log transform reduces
+the strong right skewness of the original revenue variable. The
+distribution of log-revenue is left-skewed with a longer tail for the
+lower values.
+
+\emph{Step f}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\#WRITE YOUR CODE }
+\NormalTok{dataset }\OtherTok{=}\NormalTok{ dataset }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{mutate}\NormalTok{(}\AttributeTok{log\_revenue =} \FunctionTok{na\_if}\NormalTok{(log\_revenue, }\SpecialCharTok{{-}}\ConstantTok{Inf}\NormalTok{))}
+
+\NormalTok{revenue\_mean }\OtherTok{=} \FunctionTok{mean}\NormalTok{(dataset}\SpecialCharTok{$}\NormalTok{revenue)}
+\NormalTok{revenue\_sd }\OtherTok{=} \FunctionTok{sd}\NormalTok{(dataset}\SpecialCharTok{$}\NormalTok{revenue)}
+\NormalTok{revenue\_n }\OtherTok{=} \FunctionTok{nrow}\NormalTok{(dataset)}
+
+\NormalTok{revenue\_skewness }\OtherTok{=}
+\NormalTok{  (}\DecValTok{1} \SpecialCharTok{/}\NormalTok{ revenue\_n) }\SpecialCharTok{*}
+  \FunctionTok{sum}\NormalTok{(((dataset}\SpecialCharTok{$}\NormalTok{revenue }\SpecialCharTok{{-}}\NormalTok{ revenue\_mean) }\SpecialCharTok{/}\NormalTok{ revenue\_sd)}\SpecialCharTok{\^{}}\DecValTok{3}\NormalTok{, }\AttributeTok{na.rm =} \ConstantTok{TRUE}\NormalTok{)}
+
+\NormalTok{revenue\_kurtosis }\OtherTok{=}
+\NormalTok{  (}\DecValTok{1} \SpecialCharTok{/}\NormalTok{ revenue\_n) }\SpecialCharTok{*}
+  \FunctionTok{sum}\NormalTok{(((dataset}\SpecialCharTok{$}\NormalTok{revenue }\SpecialCharTok{{-}}\NormalTok{ revenue\_mean) }\SpecialCharTok{/}\NormalTok{ revenue\_sd)}\SpecialCharTok{\^{}}\DecValTok{4}\NormalTok{, }\AttributeTok{na.rm =} \ConstantTok{TRUE}\NormalTok{) }\SpecialCharTok{{-}} \DecValTok{3}
+
+\FunctionTok{print}\NormalTok{(revenue\_skewness)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 3.545528
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{print}\NormalTok{(revenue\_kurtosis)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 15.69794
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{log\_revenue }\OtherTok{=}\NormalTok{ dataset}\SpecialCharTok{$}\NormalTok{log\_revenue[}\SpecialCharTok{!}\FunctionTok{is.na}\NormalTok{(dataset}\SpecialCharTok{$}\NormalTok{log\_revenue)]}
+
+\NormalTok{log\_n }\OtherTok{=} \FunctionTok{sum}\NormalTok{(}\SpecialCharTok{!}\FunctionTok{is.na}\NormalTok{(dataset}\SpecialCharTok{$}\NormalTok{log\_revenue))}
+\NormalTok{log\_mean }\OtherTok{=} \FunctionTok{mean}\NormalTok{(log\_revenue)}
+\NormalTok{log\_sd }\OtherTok{=} \FunctionTok{sd}\NormalTok{(log\_revenue)}
+
+\NormalTok{log\_skewness }\OtherTok{=}
+\NormalTok{  (}\DecValTok{1} \SpecialCharTok{/}\NormalTok{ log\_n) }\SpecialCharTok{*}
+  \FunctionTok{sum}\NormalTok{(((log\_revenue }\SpecialCharTok{{-}}\NormalTok{ log\_mean) }\SpecialCharTok{/}\NormalTok{ log\_sd)}\SpecialCharTok{\^{}}\DecValTok{3}\NormalTok{)}
+
+\NormalTok{log\_kurtosis }\OtherTok{=}
+\NormalTok{  (}\DecValTok{1} \SpecialCharTok{/}\NormalTok{ log\_n) }\SpecialCharTok{*}
+  \FunctionTok{sum}\NormalTok{(((log\_revenue }\SpecialCharTok{{-}}\NormalTok{ log\_mean) }\SpecialCharTok{/}\NormalTok{ log\_sd)}\SpecialCharTok{\^{}}\DecValTok{4}\NormalTok{) }\SpecialCharTok{{-}} \DecValTok{3}
+
+\FunctionTok{print}\NormalTok{(log\_skewness)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] -2.462296
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{print}\NormalTok{(log\_kurtosis)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 11.46588
+\end{verbatim}
+
+\textbf{Your Answer:}
+
+Revenue has a skewness of approximately 3.55, which matches the right
+skewed shape of the revenue histogram. Log revenue has a skewness of
+about -2.46 which matches the left skewed shape of the log revenue
+histogram. The excess kurtosis is about 15.70 for revenue and 11.47 for
+log revenue. Both values are much higher than 0, this means that both
+distributions are different from a normal distribution
+
+\section{Week 2}\label{week-2}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{movies }\OtherTok{\textless{}{-}} \FunctionTok{read.delim}\NormalTok{(}\StringTok{"data/movies3.tsv"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+1 Is your dataset movies3.tsv the full population, or is it a sample of
+a larger population? If the latter, how would you describe the full
+population? \textbf{[4 points]}
+
+\emph{Your answer here:}
+
+I think this dataset is a sample of a larger population because the full
+population is the movies that are in the dataset but also movies that
+are not in the dataset. Therefore the movies in the dataset are only a
+fraction of all movies.
+
+2 For this question, you will assume that your data set is the full
+population.
+
+\begin{enumerate}
+\def\labelenumi{\alph{enumi}.}
+\tightlist
+\item
+  What is the mean of the variable vote\_average in your data set?
+  \textbf{[2 points]}
+\item
+  Create a new data set, called movies\_sample. Make sure that it is a
+  random sample of your data set of 25 movies. What is the mean of
+  vote\_average in this random sample? How does it compare to the mean
+  of vote\_average in 2a? \textbf{[2 points]}
+\item
+  In a for loop, create 100 different samples of 25 movies, as in b, and
+  estimate the mean within each sample. Save the mean of each sample in
+  a vector called sample\_means. So the first position of the vector
+  would have the mean of the first sample, the second position the mean
+  of the second sample, etc. Print the start of this vector.
+  \textbf{[2 points]}
+\item
+  Summarize and make a histogram of sample\_means. What is the mean,
+  standard deviation and shape of its distribution? \textbf{[2 points]}
+\item
+  Using the formulas of the \emph{Central Limit Theorem}, give the
+  distribution of the sample mean of vote\_average in a sample of 25
+  movies from your population (including its expected value and standard
+  deviation). How do these values compare to your answers at d.)?
+  \textbf{[2 points]}
+\end{enumerate}
+
+\emph{Step a}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\#github test}
+\FunctionTok{mean}\NormalTok{(movies}\SpecialCharTok{$}\NormalTok{vote\_average)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 5.971994
+\end{verbatim}
+
+\textbf{Your Answer:}
+
+the mean of the variable `vote average' in the dataset is 5.97
+
+\emph{Step b}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\#WRITE YOUR CODE HERE}
+\end{Highlighting}
+\end{Shaded}
+
+\textbf{Your Answer:}
+
+Write your formulated response here.
+
+\emph{Step c}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\#WRITE YOUR CODE HERE}
+\end{Highlighting}
+\end{Shaded}
+
+\textbf{Your Answer:}
+
+Write your formulated response here.
+
+\emph{Step d}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\#WRITE YOUR CODE HERE}
+\end{Highlighting}
+\end{Shaded}
+
+\textbf{Your Answer:}
+
+Write your formulated response here.
+
+\emph{Step e}
+
+\textbf{Your Answer:}
+
+Write your formulated response here.
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\setcounter{enumi}{2}
+\tightlist
+\item
+  Is there a variable in your data set which you would expect to follow
+  a discrete uniform distribution? Explain, without looking at the data,
+  why you expect this data to be discrete uniform. If the data would
+  indeed follow a discrete uniform distribution, what would you expect
+  the mean and standard deviation of this variable to be? Next, plot a
+  histogram of the variable, and plot an appropriate discrete uniform
+  distribution on top of this histogram. Comment whether the variable
+  indeed follows this expected distribution. If the distribution
+  deviates from the discrete uniform distribution, explain why this is
+  the case. \textbf{[6 points]}
+\end{enumerate}
+
+\textbf{Your Answer:}
+
+Write your formulated response here.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\#WRITE YOUR CODE HERE}
+\end{Highlighting}
+\end{Shaded}
+
+\textbf{Your Answer:}
+
+Write your formulated response here.
+
+\section{Week 3}\label{week-3}
+
+For the next part of the assignment, assume that the movies in your data
+frame are a random sample of a larger population of movies.
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  Give a 90 percent confidence interval for the variable \emph{revenue}.
+  Interpret the result. \textbf{[2 points]}
+\end{enumerate}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\#WRITE YOUR CODE HERE}
+\NormalTok{result }\OtherTok{\textless{}{-}} \FunctionTok{t.test}\NormalTok{(dataset}\SpecialCharTok{$}\NormalTok{revenue, }\AttributeTok{conf.level =} \FloatTok{0.90}\NormalTok{)}
+
+\NormalTok{result}\SpecialCharTok{$}\NormalTok{estimate}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## mean of x 
+##  77277126
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{result}\SpecialCharTok{$}\NormalTok{conf.int}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 68027656 86526597
+## attr(,"conf.level")
+## [1] 0.9
+\end{verbatim}
+
+\textbf{Your Answer:}
+
+The sample mean revenue is 77277126. The 90\% confidence interval for
+the population mean revenue ranges from 68027656 to 86526597 dollars.
+
+2
+
+\begin{enumerate}
+\def\labelenumi{\alph{enumi}.}
+\tightlist
+\item
+  How many movies in your sample were directed by a male director? How
+  many by a female director? \textbf{[2 points]}
+\item
+  Test the null hypothesis that the chance that a movie is being
+  directed by a male or female director is equal. Clearly state your
+  null hypothesis and alternative hypothesis, and your chosen
+  significance level. Use an appropriate R function to test your
+  hypothesis, and state your conclusion. Also give the p-value that
+  corresponds to your test statistic. \textbf{[2 points]}
+\item
+  Recode revenue such that it is measured in millions of dollars. What
+  is the variance of revenue for movies with a male director? What is
+  the variance of revenue for movies with a female director?
+  \textbf{[2 points]}
+\item
+  Assume that the variance of revenue for movies with a male director in
+  your data is the same as the variance for movies with a male director
+  in your population (that is, there is no sampling uncertainty in this
+  estimate). Now, set up a hypothesis test to test for the null
+  hypothesis that the variance of revenue for movies with a female
+  director is equal to the variance for movies with a male director.
+  Clearly state your null hypothesis and alternative hypothesis, and
+  your chosen significance level. Calculate your test statistic and tell
+  how your test statistic is distributed, and state your conclusion.
+  Also give the p-value that corresponds to your test statistic.
+  \textbf{[2 points]}
+\end{enumerate}
+
+\emph{step a}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{table}\NormalTok{(dataset}\SpecialCharTok{$}\NormalTok{director\_gender)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## 
+## female   male 
+##     65    588
+\end{verbatim}
+
+\textbf{Your Answer:}
+
+In the sample, 588 movies were directed by male directors and 65 movies
+were directed by female directors.
+
+\emph{step b}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\#WRITE YOUR CODE HERE}
+\NormalTok{dataset}\SpecialCharTok{$}\NormalTok{SexDum}\OtherTok{\textless{}{-}}\ConstantTok{NA}
+\NormalTok{dataset}\SpecialCharTok{$}\NormalTok{SexDum[dataset}\SpecialCharTok{$}\NormalTok{director\_gender}\SpecialCharTok{==}\StringTok{"male"}\NormalTok{]}\OtherTok{\textless{}{-}}\DecValTok{1}
+\NormalTok{dataset}\SpecialCharTok{$}\NormalTok{SexDum[dataset}\SpecialCharTok{$}\NormalTok{director\_gender}\SpecialCharTok{==}\StringTok{"female"}\NormalTok{]}\OtherTok{\textless{}{-}}\DecValTok{0}
+\FunctionTok{table}\NormalTok{(dataset}\SpecialCharTok{$}\NormalTok{SexDum)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## 
+##   0   1 
+##  65 588
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{binom.test}\NormalTok{(}\DecValTok{588}\NormalTok{, }\DecValTok{653}\NormalTok{, }\FloatTok{0.5}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## 
+##  Exact binomial test
+## 
+## data:  588 and 653
+## number of successes = 588, number of trials = 653, p-value < 2.2e-16
+## alternative hypothesis: true probability of success is not equal to 0.5
+## 95 percent confidence interval:
+##  0.8748885 0.9223348
+## sample estimates:
+## probability of success 
+##              0.9004594
+\end{verbatim}
+
+\textbf{Your Answer:}
+
+Null hypothesis: H0 : p=0,5
+
+Alternative hypothesis: H1 : p!= 0,5
+
+Significance level: alpha = 0,05
+
+p-value \textless{} 2,2e-16
+
+We reject the H0 hypothesis because the p-value is smaller than
+significance level of 0,05. The test also shows that about 90\% of the
+movies with known director gender were directed by male directors.
+
+\emph{step c}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{dataset}\SpecialCharTok{$}\NormalTok{revenue\_in\_millions }\OtherTok{\textless{}{-}}\NormalTok{ dataset}\SpecialCharTok{$}\NormalTok{revenue }\SpecialCharTok{/} \DecValTok{1000000}
+\NormalTok{manvariance}\OtherTok{\textless{}{-}}\FunctionTok{var}\NormalTok{(dataset}\SpecialCharTok{$}\NormalTok{revenue\_in\_millions[dataset}\SpecialCharTok{$}\NormalTok{director\_gender}\SpecialCharTok{==}\StringTok{"male"}\NormalTok{],}\AttributeTok{na.rm=}\ConstantTok{TRUE}\NormalTok{)}
+\NormalTok{womanvariance}\OtherTok{\textless{}{-}}\FunctionTok{var}\NormalTok{(dataset}\SpecialCharTok{$}\NormalTok{revenue\_in\_millions[dataset}\SpecialCharTok{$}\NormalTok{director\_gender}\SpecialCharTok{==}\StringTok{"female"}\NormalTok{],}\AttributeTok{na.rm=}\ConstantTok{TRUE}\NormalTok{)}
+
+\NormalTok{manvariance}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 24280.03
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{womanvariance}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 8617.243
+\end{verbatim}
+
+\textbf{Your Answer:}
+
+The variance of revenue for movies with male directors is 24280.03. The
+variance for movies with female directors is 8617.23.
+
+\emph{step d}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\#WRITE YOUR CODE HERE}
+\end{Highlighting}
+\end{Shaded}
+
+\textbf{Your Answer:}
+
+Write your formulated response here.
+
+3
+
+\begin{enumerate}
+\def\labelenumi{\alph{enumi}.}
+\tightlist
+\item
+  Create a scatter plot with year on the x axis and mean of revenue
+  within that year on the y-axis. Make sure it has an appropriate title,
+  and appropriate titles and labels for the x- and y-axis. Is revenue of
+  movies increasing or decreasing over time? \textbf{[3 points]}
+\item
+  Recreate the scatter plot with year on the x axis and mean\_revenue on
+  the y-axis, but now add bars around each point, indicating the 95\%
+  confidence interval. \textbf{[3 points]}
+\item
+  If you look closely at the resulting plot in b.), you will probably
+  see that the confidence intervals in some years are wider than in
+  other years. What are some possible reasons that a confidence interval
+  in a given year can be wide? Can you verify this using your data?
+  \textbf{[4 points]}
+\end{enumerate}
+
+\emph{step a}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\#WRITE YOUR CODE HERE}
+\end{Highlighting}
+\end{Shaded}
+
+\textbf{Your Answer:}
+
+Write your formulated response here.
+
+\emph{step b}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\#WRITE YOUR CODE HERE}
+\end{Highlighting}
+\end{Shaded}
+
+\textbf{Your Answer:}
+
+Write your formulated response here.
+
+\emph{step c}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\#WRITE YOUR CODE HERE}
+\end{Highlighting}
+\end{Shaded}
+
+\section{Week 4}\label{week-4}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  There is an argument going on in the movie studio. \emph{Bob} claims
+  that production budgets are getting out of hand, and that the studio
+  should focus on making cheaper movies. \emph{Chantal} disagrees. She
+  tells Bob that ``Every dollar we spend on movie production is more
+  than offset by the increase in movie revenue'\,'.
+\end{enumerate}
+
+\begin{enumerate}
+\def\labelenumi{\alph{enumi}.}
+\tightlist
+\item
+  Set up a regression model to test Chantal's claim, and estimate it.
+  That is, estimate:
+  \[\text{Revenue}_i=\beta_0+\beta_1 \text{Budget}_i +\varepsilon_i.\]
+  Print a summary of your estimated model. \textbf{[2 points]}
+\item
+  What is the estimated value of \(\beta_1\) and how do you interpet it?
+  \textbf{[2 points]}
+\item
+  Test for the null hypothesis that \(\beta_1 \leq 1\). Report the
+  p-value and state your conclusion. \textbf{[2 points]}
+\item
+  Next, estimate the model
+  \[\text{Log Revenue}_i=\beta_0+\beta_1 \text{Log Budget}_i +\varepsilon_i.\]
+  When creating the variables Log Revenue and Log Budget, make sure that
+  movies with a Revenue or Budget of zero are assigned the value ``NA''.
+  Print a summary of your estimated model. \textbf{[2 points]}
+\item
+  What is the estimated value of \(\beta_1\) and how do you interpet it?
+  \textbf{[2 points]}
+\item
+  Which model has better fit? The level-level model or the log-log
+  model? Explain. \textbf{[2 points]}
+\item
+  Who do you think is correct? Bob or Chantal? What would you advise the
+  movie studio to do? \textbf{[2 points]}
+\end{enumerate}
+
+\emph{step a}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\#WRITE YOUR CODE HERE}
+\end{Highlighting}
+\end{Shaded}
+
+\textbf{Your Answer:}
+
+Write your formulated response here.
+
+\emph{step b}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\#WRITE YOUR CODE HERE}
+\end{Highlighting}
+\end{Shaded}
+
+\textbf{Your Answer:}
+
+Write your formulated response here.
+
+\emph{step c}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\#WRITE YOUR CODE HERE}
+\end{Highlighting}
+\end{Shaded}
+
+\textbf{Your Answer:}
+
+Write your formulated response here.
+
+\emph{step d}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\#WRITE YOUR CODE HERE}
+\end{Highlighting}
+\end{Shaded}
+
+\textbf{Your Answer:}
+
+Write your formulated response here.
+
+\emph{step e}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\#WRITE YOUR CODE HERE}
+\end{Highlighting}
+\end{Shaded}
+
+\textbf{Your Answer:}
+
+Write your formulated response here.
+
+\emph{step f}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\#WRITE YOUR CODE HERE}
+\end{Highlighting}
+\end{Shaded}
+
+\textbf{Your Answer:}
+
+Write your formulated response here.
+
+\emph{step g}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\#WRITE YOUR CODE HERE}
+\end{Highlighting}
+\end{Shaded}
+
+\textbf{Your Answer:}
+
+Write your formulated response here.
+
+2
+
+\begin{enumerate}
+\def\labelenumi{\alph{enumi}.}
+\tightlist
+\item
+  Make a scatterplot with log revenue on the y-axis, and log budget on
+  the x-axis. Within the same scatterplot, draw a straight line which
+  summarizes the association between the log of revenue and log of
+  budget. \textbf{[3 points]}
+\item
+  Using the insights from the scatterplot, your linear model, and your
+  data, find an example of a movie that vastly overperformed. That
+  means, find a movie that had much more revenue than expected, given
+  its budget. For this movie, report its log of revenue, its predicted
+  log of revenue, and its residual. \textbf{[3 points]}
+\end{enumerate}
+
+\emph{step a}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\#WRITE YOUR CODE HERE}
+\end{Highlighting}
+\end{Shaded}
+
+\textbf{Your Answer:}
+
+Write your formulated response here.
+
+\emph{step b}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\#WRITE YOUR CODE HERE}
+\end{Highlighting}
+\end{Shaded}
+
+\textbf{Your Answer:}
+
+Write your formulated response here.
+
+\section{Week 5}\label{week-5}
+
+\begin{enumerate}
+\def\labelenumi{\alph{enumi}.}
+\tightlist
+\item
+  Make a frequency table of the variable genre. Which are the three
+  genres that occur the most? \textbf{[2 points]}
+\item
+  Create a new variable called genre2. Make sure that the three most
+  popular genres remain the same, but that all the other genres get
+  categorized into one genre called ``Other''. Report a frequency table
+  of this new variable genre2. \textbf{[2 points]}
+\item
+  Estimate an OLS model which has as dependent variable the log of
+  revenue of a movie, and as independent variable the log of budget, a
+  dummy for each level that genre2 can take, and the year of release.
+  Show a summary of the resulting model and interpret each coefficient.
+  \textbf{[4 points]}
+\end{enumerate}
+
+The movie studio that you work at is releasing a new movie in 2026. It
+will be a Drama movie with a budget of 20,000,0000. It will have a
+runtime of 120 minutes.
+
+\begin{enumerate}
+\def\labelenumi{\alph{enumi}.}
+\setcounter{enumi}{3}
+\tightlist
+\item
+  Estimate a model that is able to predict the revenue of this movie.
+  Give its predicted revenue and include a 90\% prediction interval.
+  \textbf{[5 points]}
+\item
+  Plot the residuals against various independent variables in the model.
+  Do you find any evidence of heteroskedasticity? \textbf{[2 points]}
+\item
+  One executive at the studio wants to time the release of the movie to
+  a specific month of the year such that they can maximize revenue.
+  Another executive is of the opinion that the month in which the movie
+  is released will not have a big impact on its revenue. Estimate a
+  model that can test whether the month of release impacts the revenue
+  of a movie. Use an appropriate hypothesis test to test whether month
+  of release matters. What would you advise the movie studio regarding
+  the timing of the release of the movie? \textbf{[5 points]}
+\end{enumerate}
+
+\emph{step a}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\#WRITE YOUR CODE HERE}
+\end{Highlighting}
+\end{Shaded}
+
+\textbf{Your Answer:}
+
+Write your formulated response here.
+
+\emph{step b}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\#WRITE YOUR CODE HERE}
+\end{Highlighting}
+\end{Shaded}
+
+\textbf{Your Answer:}
+
+Write your formulated response here.
+
+\emph{step c}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\#WRITE YOUR CODE HERE}
+\end{Highlighting}
+\end{Shaded}
+
+\textbf{Your Answer:}
+
+Write your formulated response here.
+
+\emph{step d}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\#WRITE YOUR CODE HERE}
+\end{Highlighting}
+\end{Shaded}
+
+\textbf{Your Answer:}
+
+Write your formulated response here.
+
+\emph{step e}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\#WRITE YOUR CODE HERE}
+\end{Highlighting}
+\end{Shaded}
+
+\textbf{Your Answer:}
+
+Write your formulated response here.
+
+\emph{step f}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\#WRITE YOUR CODE HERE}
+\end{Highlighting}
+\end{Shaded}
+
+
+\end{document}
