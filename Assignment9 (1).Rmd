@@ -71,7 +71,7 @@ head(dataset)
 
 **Your Answer:**
 
-The dataset has 707 observations and 19 variables, there are 707 subjects in the dataset and each subject is one movie, with each row representing one movie. 
+The dataset has 707 observations and 19 variables, there are 707 subjects in the dataset and each subject is one movie, with each row representing one movie.
 
 2.  Which of the following types of variables are present in your data set? (i) nominal; (ii) ordinal; (iii); continuous; (iv) discrete. If present, name one example of such a variable present in your data set. \textbf{[4 points]}
 
@@ -89,7 +89,7 @@ The dataset contains nominal, continuous and discrete variables. An example of n
 
 <!-- -->
 
-a.  Summarize the variable revenue and report its mean, median, maximum, and minimum. \textbf{[2 points]} 
+a.  Summarize the variable revenue and report its mean, median, maximum, and minimum. \textbf{[2 points]}
 b.  Which movie has the highest revenue in your data set and how much is this revenue. Which movie has the lowest and how much is its revenue? If multiple movies have the exact same highest or lowest revenue, give only one example. \textbf{[2 points]}
 c.  Create a histogram of the variable revenue. Make sure it has an appropriate title, and appropriate titles and labels for the x- and y-axis. Describe the shape of the histogram. What does this tell you about the nature of making money in the movies industry? \textbf{[2 points]}
 d.  Add a new variable to your data set: the log of revenue. When creating this variable, what happens to movies for which revenue is zero? What then happens when you calculate the mean of log revenue? \textbf{[2 points]}
@@ -105,79 +105,121 @@ Each week consists of 1, 2, or 3 subquestions. The total amount of points you ca
 ```{r}
 
 #WRITE YOUR CODE HERE
-dataset %>%
+revenue_summary <- dataset %>%
   summarize(
-    mean_revenue = mean(revenue),
-    median_revenue = median(revenue),
-    max_revenue = max(revenue),
-    min_revenue = min(revenue)
+    mean_revenue = mean(revenue, na.rm = TRUE),
+    median_revenue = median(revenue, na.rm= TRUE),
+    max_revenue = max(revenue, na.rm = TRUE),
+    min_revenue = min(revenue, na.rm = TRUE)
+    
   )
+    print(revenue_summary)
 ```
 
 **Your Answer:**
 
-The mean revenue is 77,277,126 and the median is 17,986,781. The max revenue is 1,153,304,495 and the min revenue is 0. The mean is much higher than the median which means that some very high revenue sales increased the mean. 
+The mean revenue is 77,277,126 and the median is 17,986,781. The max revenue is 1,153,304,495 and the min revenue is 0. The mean is much higher than the median which means that some very high revenue sales increased the mean.
 
 *Step b*
 
 ```{r}
 
 #WRITE YOUR CODE HERE
-dataset %>%
-  filter(revenue == max(revenue)) %>%
+top_revenue = dataset %>%
+  filter(revenue == max(revenue, na.rm = TRUE)) %>%
   select(title, revenue)
 
-dataset %>%
-  filter(revenue == min(revenue)) %>%
+min_revenue = dataset %>%
+  filter(revenue == min(revenue, na.rm = TRUE)) %>%
   select(title, revenue) %>%
   slice_head(n = 1)
+print(top_revenue)
+print(min_revenue)
 ```
 
 **Your Answer:**
 
 The movie with the highest revenue is Captain America: Civil war at 1,153,304,495. The movie with the lowest revenue is Chasing Mavericks, which is 0.
+
 *Step c*
 
 ```{r}
-
 #WRITE YOUR CODE HERE
-
+ggplot(dataset, aes(x = revenue)) +
+  geom_histogram() +
+  labs(
+    title = "Distribution of Movie Revenue",
+    x = "Revenue",
+    y = "Frequency"
+  )
 ```
 
 **Your Answer:**
 
-Write your formulated response here.
+The revenue distribution is skewed to the right. Most movies seem to have lower revenues, while only a small number of movies have extremely high revenues. This tells us that movies with extremely high movie revenues are concentrated among a relatively small number of movies.
 
 *Step d*
 
 ```{r}
 
 #WRITE YOUR CODE HERE
+dataset <- dataset %>%
+  mutate(log_revenue = log(revenue))
 
+dataset %>%
+  filter(revenue == 0) %>%
+  select(revenue, log_revenue) %>%
+  slice_head(n = 5)
+
+mean(dataset$log_revenue)
 ```
 
 **Your Answer:**
 
-Write your formulated response here.
+For movies with revenues equal to 0, the log revenue becomes -Inf. Because the log revenue variable contains these -Ifn values, its mean also is -Inf.
 
 *Step e*
 
 ```{r}
 
 #WRITE YOUR CODE HERE
+dataset <- dataset %>%
+  mutate(log_revenue = na_if(log_revenue, -Inf))
 
+log_revenue_no_na <- dataset$log_revenue[!is.na(dataset$log_revenue)]
+
+mean(log_revenue_no_na)
+
+ggplot(dataset, aes(x = log_revenue)) +
+  geom_histogram() +
+  labs(
+    title = "Distribution of Log Revenue",
+    x = "Log Revenue",
+    y = "Frequency"
+  )
 ```
 
-**Your Answer:**
-
-Write your formulated response here.
+**Your Answer:** Replacing the log revenues of zero-revenue movies with NA, the mean log revenue is around 17.35. The log transform reduces the strong right skewness of the original revenue variable. The distribution of log-revenue is left-skewed with a longer tail for the lower values.
 
 *Step f*
 
 ```{r}
 
 #WRITE YOUR CODE HERE
+revenue_mean <- mean(dataset$revenue)
+revenue_sd <- sd(dataset$revenue)
+revenue_n <- nrow(dataset)
 
+revenue_skewness <-
+  (1 / revenue_n) *
+  sum(((dataset$revenue - revenue_mean) / revenue_sd)^3)
+
+revenue_kurtosis <-
+  (1 / revenue_n) *
+  sum(((dataset$revenue - revenue_mean) / revenue_sd)^4) - 3
+
+revenue_skewness
+revenue_kurtosis
 ```
 
 **Your Answer:**
