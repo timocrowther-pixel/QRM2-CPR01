@@ -63,29 +63,33 @@ We encourage you to keep your code blocks, printing statements, and final answer
 ```{r}
 #WRITE YOUR CODE HERE
 dataset <- read.delim("data/movies3.tsv")
-
+library(tidyverse)
+nrow(dataset)
+ncol(dataset)
+head(dataset)
 ```
 
 **Your Answer:**
 
-Write your response here.
+The dataset has 707 observations and 19 variables, there are 707 subjects in the dataset and each subject is one movie, with each row representing one movie. 
 
 2.  Which of the following types of variables are present in your data set? (i) nominal; (ii) ordinal; (iii); continuous; (iv) discrete. If present, name one example of such a variable present in your data set. \textbf{[4 points]}
 
 ```{r answer 2}
 #WRITE YOUR CODE HERE
-
+str(dataset)
+head(dataset)
 ```
 
 **Your Answer:**
 
-Write your response here.
+The dataset contains nominal, continuous and discrete variables. An example of nominal variable in our dataset is genre, as movie genres are categories that are descriptive and cannot be ranked. An example of a continuous variable is popularity, because it can take numerical values within a range. Here an example of a discrete variable is vote_count, as it is a count. There also doesn't seem to be a clear ordinal variable in this dataset
 
 3.  A movie studio wants to know which types of movies give maximal revenue. Perform the following steps to provide the movie studio with an analysis which corresponds to their request:
 
 <!-- -->
 
-a.  Summarize the variable revenue and report its mean, median, maximum, and minimum. \textbf{[2 points]}
+a.  Summarize the variable revenue and report its mean, median, maximum, and minimum. \textbf{[2 points]} 
 b.  Which movie has the highest revenue in your data set and how much is this revenue. Which movie has the lowest and how much is its revenue? If multiple movies have the exact same highest or lowest revenue, give only one example. \textbf{[2 points]}
 c.  Create a histogram of the variable revenue. Make sure it has an appropriate title, and appropriate titles and labels for the x- and y-axis. Describe the shape of the histogram. What does this tell you about the nature of making money in the movies industry? \textbf{[2 points]}
 d.  Add a new variable to your data set: the log of revenue. When creating this variable, what happens to movies for which revenue is zero? What then happens when you calculate the mean of log revenue? \textbf{[2 points]}
@@ -101,25 +105,37 @@ Each week consists of 1, 2, or 3 subquestions. The total amount of points you ca
 ```{r}
 
 #WRITE YOUR CODE HERE
-
+dataset %>%
+  summarize(
+    mean_revenue = mean(revenue),
+    median_revenue = median(revenue),
+    max_revenue = max(revenue),
+    min_revenue = min(revenue)
+  )
 ```
 
 **Your Answer:**
 
-Write your formulated response here.
+The mean revenue is 77,277,126 and the median is 17,986,781. The max revenue is 1,153,304,495 and the min revenue is 0. The mean is much higher than the median which means that some very high revenue sales increased the mean. 
 
 *Step b*
 
 ```{r}
 
 #WRITE YOUR CODE HERE
-hi
+dataset %>%
+  filter(revenue == max(revenue)) %>%
+  select(title, revenue)
+
+dataset %>%
+  filter(revenue == min(revenue)) %>%
+  select(title, revenue) %>%
+  slice_head(n = 1)
 ```
 
 **Your Answer:**
 
-Write your formulated response here.
-
+The movie with the highest revenue is Captain America: Civil war at 1,153,304,495. The movie with the lowest revenue is Chasing Mavericks, which is 0.
 *Step c*
 
 ```{r}
@@ -178,7 +194,7 @@ movies <- read.delim("data/movies3.tsv")
 
 *Your answer here:*
 
-I think this dataset is a sample of a larger population because the full population is the movies that are in the dataset but also movies that are not in the dataset. Therefore the movies in the dataset are only a fraction of all movies. 
+I think this dataset is a sample of a larger population because the full population is the movies that are in the dataset but also movies that are not in the dataset. Therefore the movies in the dataset are only a fraction of all movies.
 
 2 For this question, you will assume that your data set is the full population.
 
