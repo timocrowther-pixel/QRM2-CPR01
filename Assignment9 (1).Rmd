@@ -394,7 +394,7 @@ Significance level: alpha = 0.05
 
 p-value \< 2.2e-16
 
-We reject the H0 hypothesis because the p-value is smaller than significance level of 0,05. The test also shows that about 90% of the movies with known director gender were directed by male directors.
+We reject the H0 hypothesis because the p-value is smaller than significance level of 0.05. The test also shows that about 90% of the movies with known director gender were directed by male directors.
 
 *step c*
 
@@ -517,9 +517,25 @@ The plot shows the mean revenue for each year together with its 95% confidence i
 *step c*
 
 ```{r}
-#WRITE YOUR CODE HERE
+year_data$n <- sapply(years, function(y) {
+  length(dataset$revenue[
+    dataset$release_year == y & !is.na(dataset$revenue)
+  ])
+})
 
+year_data$sd_revenue <- sapply(years, function(y) {
+  sd(dataset$revenue[dataset$release_year == y], na.rm = TRUE)
+})
+
+year_data$ci_width <- year_data$upper - year_data$lower
+
+year_data[
+  order(-year_data$ci_width),
+  c("release_year", "n", "sd_revenue", "ci_width")
+]
 ```
+**Your Answer:**
+Confidence intervals can be wider when the number of movies in a year is small or when the variation in revenue is large. In the data, 1994 has only 10 movies and a high standard deviation, resulting in one of the widest confidence intervals. In 2016, the standard deviation is very high, which also leads to a wide confidence interval. Years with more observations generally have narrower intervals.
 
 # Week 4
 
