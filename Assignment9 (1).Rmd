@@ -386,13 +386,13 @@ binom.test(588, 653, 0.5)
 
 **Your Answer:**
 
-Null hypothesis: H0 : p=0,5
+Null hypothesis: H0 : p=0.5
 
-Alternative hypothesis: H1 : p!= 0,5
+Alternative hypothesis: H1 : p!= 0.5
 
-Significance level: alpha = 0,05
+Significance level: alpha = 0.05
 
-p-value \< 2,2e-16
+p-value \< 2.2e-16
 
 We reject the H0 hypothesis because the p-value is smaller than significance level of 0,05. The test also shows that about 90% of the movies with known director gender were directed by male directors.
 
@@ -442,7 +442,7 @@ Significance level: alpha = 0.05
 
 X\^2 = 22.71429, df=64, p-valeu= 7.889598e-07
 
-We reject the H0 hypothesis because the p-value is smaller than significance level of 0.05. This shows that the variance in revenue for movies with female directors is significantly different from the variance for movies with male directors.
+We reject the H0 hypothesis because the p-value is smaller than significance level of 0.05. This shows that the variance in revenue for movies with female directors is significantly different from the variance for movies with male directors. Under H0, the test statistic follows a chi-square distribution with 64 degrees of freedom.
 
 3
 
@@ -512,7 +512,7 @@ ggplot(year_data, aes(x = release_year, y = mean_revenue, na.rm = TRUE)) +
 
 **Your Answer:**
 
-Write your formulated response here.
+The plot shows the mean revenue for each year together with its 95% confidence interval. The width of the confidence intervals differs across years.
 
 *step c*
 
