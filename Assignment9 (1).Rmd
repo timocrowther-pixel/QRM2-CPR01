@@ -341,7 +341,6 @@ For the next part of the assignment, assume that the movies in your data frame a
 1.  Give a 90 percent confidence interval for the variable *revenue*. Interpret the result. \textbf{[2 points]}
 
 ```{r}
-#WRITE YOUR CODE HERE
 result <- t.test(dataset$revenue, conf.level = 0.90)
 
 result$estimate
@@ -534,8 +533,8 @@ year_data[
   c("release_year", "n", "sd_revenue", "ci_width")
 ]
 ```
-**Your Answer:**
-Confidence intervals can be wider when the number of movies in a year is small or when the variation in revenue is large. In the data, 1994 has only 10 movies and a high standard deviation, resulting in one of the widest confidence intervals. In 2016, the standard deviation is very high, which also leads to a wide confidence interval. Years with more observations generally have narrower intervals.
+
+**Your Answer:** Confidence intervals can be wider when the number of movies in a year is small or when the variation in revenue is large. In the data, 1994 has only 10 movies and a high standard deviation, resulting in one of the widest confidence intervals. In 2016, the standard deviation is very high, which also leads to a wide confidence interval. Years with more observations generally have narrower intervals.
 
 # Week 4
 
