@@ -18,7 +18,6 @@ header-includes:
     showtabs = false,
     breaklines,
     commandchars=\\\{\}
-  }
 format:
   html:
     code-overflow: wrap
@@ -62,24 +61,29 @@ We encourage you to keep your code blocks, printing statements, and final answer
 
 ```{r}
 #WRITE YOUR CODE HERE
-dataset <- read.delim("data/movies3.tsv")
-
+dataset = read.delim("data/movies3.tsv")
+library(tidyverse)
+library(dplyr)
+nrow(dataset)
+ncol(dataset)
+head(dataset)
 ```
 
 **Your Answer:**
 
-Write your response here.
+The dataset has 707 observations and 19 variables, there are 707 subjects in the dataset and each subject is one movie, with each row representing one movie.
 
 2.  Which of the following types of variables are present in your data set? (i) nominal; (ii) ordinal; (iii); continuous; (iv) discrete. If present, name one example of such a variable present in your data set. \textbf{[4 points]}
 
 ```{r answer 2}
 #WRITE YOUR CODE HERE
-
+str(dataset)
+head(dataset)
 ```
 
 **Your Answer:**
 
-Write your response here.
+The dataset contains nominal, continuous and discrete variables. An example of nominal variable in our dataset is genre, as movie genres are categories that are descriptive and cannot be ranked. An example of a continuous variable is popularity, because it can take numerical values within a range. Here an example of a discrete variable is vote_count, as it is a count. There also doesn't seem to be a clear ordinal variable in this dataset
 
 3.  A movie studio wants to know which types of movies give maximal revenue. Perform the following steps to provide the movie studio with an analysis which corresponds to their request:
 
@@ -101,80 +105,160 @@ Each week consists of 1, 2, or 3 subquestions. The total amount of points you ca
 ```{r}
 
 #WRITE YOUR CODE HERE
-
+revenue_summary = dataset %>%
+  summarize(
+    mean_revenue = mean(revenue, na.rm = TRUE),
+    median_revenue = median(revenue, na.rm= TRUE),
+    max_revenue = max(revenue, na.rm = TRUE),
+    min_revenue = min(revenue, na.rm = TRUE)
+    
+  )
+    print(revenue_summary)
 ```
 
 **Your Answer:**
 
-Write your formulated response here.
+The mean revenue is 77,277,126 and the median is 17,986,781. The max revenue is 1,153,304,495 and the min revenue is 0. The mean is much higher than the median which means that some very high revenue sales increased the mean.
 
 *Step b*
 
 ```{r}
 
 #WRITE YOUR CODE HERE
-hi
+top_revenue = dataset %>%
+  filter(revenue == max(revenue, na.rm = TRUE)) %>%
+  select(title, revenue)#
+
+min_revenue = dataset %>%
+  filter(revenue == min(revenue, na.rm = TRUE)) %>%
+  select(title, revenue) 
+
+print(top_revenue)
+print(min_revenue)
 ```
 
 **Your Answer:**
 
-Write your formulated response here.
+The movie with the highest revenue is Captain America: Civil war at 1,153,304,495. The movie with the lowest revenue is Chasing Mavericks, which is 0.
 
 *Step c*
 
 ```{r}
-
 #WRITE YOUR CODE HERE
-
+ggplot(dataset, aes(x = revenue)) +
+  geom_histogram() +
+  labs(
+    title = "Distribution of Movie Revenue",
+    x = "Revenue",
+    y = "Frequency"
+  )
 ```
 
 **Your Answer:**
 
-Write your formulated response here.
+The revenue distribution is skewed to the right. Most movies seem to have lower revenues, while only a small number of movies have extremely high revenues. This tells us that movies with extremely high movie revenues are concentrated among a relatively small number of movies.
 
 *Step d*
 
 ```{r}
 
 #WRITE YOUR CODE HERE
+dataset = dataset %>%
+  mutate(log_revenue = log(revenue))
 
+zero_revenue = dataset %>%
+  filter(revenue == 0) %>%
+  select(revenue, log_revenue)
+
+  head(zero_revenue)
+
+average_log_revenue = mean(dataset$log_revenue, na.rm = TRUE)
+print(average_log_revenue)
 ```
 
 **Your Answer:**
 
-Write your formulated response here.
+For movies with revenues equal to 0, the log revenue becomes -Inf. Because the log revenue variable contains these -Inf values, its mean also is -Inf.
 
 *Step e*
 
 ```{r}
 
 #WRITE YOUR CODE HERE
+dataset = dataset %>%
+  mutate(log_revenue = na_if(log_revenue, -Inf))
 
+log_revenue_no_na = dataset$log_revenue[!is.na(dataset$log_revenue)]
+
+mean(log_revenue_no_na)
+
+ggplot(dataset, aes(x = log_revenue)) +
+  geom_histogram() +
+  labs(
+    title = "Distribution of Log Revenue",
+    x = "Log Revenue",
+    y = "Frequency"
+  )
 ```
 
-**Your Answer:**
-
-Write your formulated response here.
+**Your Answer:** Replacing the log revenues of zero-revenue movies with NA, the mean log revenue is around 17.35. The log transform reduces the strong right skewness of the original revenue variable. The distribution of log-revenue is left-skewed with a longer tail for the lower values.
 
 *Step f*
 
 ```{r}
 
-#WRITE YOUR CODE HERE
+#WRITE YOUR CODE 
+dataset = dataset %>%
+  mutate(log_revenue = na_if(log_revenue, -Inf))
 
+revenue_mean = mean(dataset$revenue)
+revenue_sd = sd(dataset$revenue)
+revenue_n = nrow(dataset)
+
+revenue_skewness =
+  (1 / revenue_n) *
+  sum(((dataset$revenue - revenue_mean) / revenue_sd)^3, na.rm = TRUE)
+
+revenue_kurtosis =
+  (1 / revenue_n) *
+  sum(((dataset$revenue - revenue_mean) / revenue_sd)^4, na.rm = TRUE) - 3
+
+print(revenue_skewness)
+print(revenue_kurtosis)
+
+log_revenue = dataset$log_revenue[!is.na(dataset$log_revenue)]
+
+log_n = sum(!is.na(dataset$log_revenue))
+log_mean = mean(log_revenue)
+log_sd = sd(log_revenue)
+
+log_skewness =
+  (1 / log_n) *
+  sum(((log_revenue - log_mean) / log_sd)^3)
+
+log_kurtosis =
+  (1 / log_n) *
+  sum(((log_revenue - log_mean) / log_sd)^4) - 3
+
+print(log_skewness)
+print(log_kurtosis)
 ```
 
 **Your Answer:**
 
-Write your formulated response here.
+Revenue has a skewness of approximately 3.55, which matches the right skewed shape of the revenue histogram. Log revenue has a skewness of about -2.46 which matches the left skewed shape of the log revenue histogram. The excess kurtosis is about 15.70 for revenue and 11.47 for log revenue. Both values are much higher than 0, this means that both distributions are different from a normal distribution
 
 # Week 2
+
+```{r}
+movies <- read.delim("data/movies3.tsv")
+```
 
 1 Is your dataset movies3.tsv the full population, or is it a sample of a larger population? If the latter, how would you describe the full population? \textbf{[4 points]}
 
 *Your answer here:*
 
-Write your formulated response here.
+I think this dataset is a sample of a larger population because the full population is the movies that are in the dataset but also movies that are not in the dataset. Therefore the movies in the dataset are only a fraction of all movies.
 
 2 For this question, you will assume that your data set is the full population.
 
@@ -187,13 +271,14 @@ e.  Using the formulas of the *Central Limit Theorem*, give the distribution of 
 *Step a*
 
 ```{r}
-#WRITE YOUR CODE HERE
+#github test
+mean(movies$vote_average)
 
 ```
 
 **Your Answer:**
 
-Write your formulated response here.
+the mean of the variable 'vote average' in the dataset is 5.97
 
 *Step b*
 
