@@ -1,7 +1,7 @@
 ---
 title: "QRM II Graded Assignment (9)"
 subtitle: "Period 1, 2026"
-author: "Assignement Group 39: Jake Kody Te Koppele Blakey, Omer Faruk, Timo Crowther, Jaleel Bart & Fatima Malik "
+author: "Assignement Group 39: Jake Kody Te Koppele Blakey, Ömer Faruk Uluç, Timo Crowther, Jaleel Bart & Fatima Malik "
 date:  "`r format(Sys.Date(), '%d-%m-%Y')`"
 output:
   pdf_document:
@@ -329,13 +329,35 @@ The variance of revenue for movies with male directors is 24280.03. The variance
 *step d*
 
 ```{r}
-#WRITE YOUR CODE HERE
+female_revenue <- dataset$revenue_in_millions[dataset$director_gender == "female"]
+female_revenue <- female_revenue[!is.na(female_revenue)]
+
+n <- length(female_revenue)
+df <- n - 1
+
+chisq <- df * womanvariance / manvariance
+
+pval <- 2 * min(pchisq(chisq, df), 1 - pchisq(chisq, df))
+
+
+n
+df
+chisq
+pval
 
 ```
 
 **Your Answer:**
 
-Write your formulated response here.
+Null hypothesis: H0 : variance(male) = variance(female)
+
+Alternative hypothesis: H1 : variance(male) != variance(female)
+
+Significance level: alpha = 0.05
+
+X\^2 = 22.71429, df=64, p-valeu= 7.889598e-07
+
+We reject the H0 hypothesis because the p-value is smaller than significance level of 0.05. This shows that the variance in revenue for movies with female directors is significantly different from the variance for movies with male directors.
 
 3
 
@@ -346,19 +368,61 @@ c.  If you look closely at the resulting plot in b.), you will probably see that
 *step a*
 
 ```{r}
-#WRITE YOUR CODE HERE
+library(ggplot2)
+library(dplyr)
 
+year_data <- dataset |>
+  group_by(release_year) |>
+  summarize(
+    mean_revenue = mean(revenue, na.rm = TRUE)
+  )
+
+head(year_data)
+
+ggplot(year_data, aes(x = release_year, y = mean_revenue, na.rm = TRUE)) +
+  geom_point() +
+  labs(
+    title = "scatterplot of average revenue ",
+    x = "years",
+    y = "average revenue per year"
+  )
 ```
 
 **Your Answer:**
 
-Write your formulated response here.
+The scatter plot shows that average movie revenue generally increases over time, although there are fluctuations between years.
 
 *step b*
 
 ```{r}
-#WRITE YOUR CODE HERE
+years <- sort(unique(dataset$release_year))
+year_data <- data.frame(
+  release_year = years,
+  
+  mean_revenue = sapply(years, function(y) {
+    t.test(dataset$revenue[dataset$release_year == y])$estimate
+  }),
+  
+  lower = sapply(years, function(y) {
+    t.test(dataset$revenue[dataset$release_year == y])$conf.int[1]
+  }),
+  
+  upper = sapply(years, function(y) {
+    t.test(dataset$revenue[dataset$release_year == y])$conf.int[2]
+  })
+)
 
+ggplot(year_data, aes(x = release_year, y = mean_revenue, na.rm = TRUE)) +
+  geom_point() +
+  geom_errorbar(
+    aes(ymin = lower, ymax = upper),
+    width = 0.2
+  ) +
+  labs(
+    title = "scatterplot of average revenue ",
+    x = "years",
+    y = "average revenue per year"
+  )
 ```
 
 **Your Answer:**
